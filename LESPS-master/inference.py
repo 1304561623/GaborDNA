@@ -54,6 +54,7 @@ def test():
             img = Variable(img).cuda()
             pred = net.forward(img)
             pred = pred[:,:,:size[0],:size[1]]
+            torch.cuda.empty_cache()
             ### save img
             model_name = opt.pth_dir.split('/')[-1] .split('.')[0]
             if opt.save_img == True:
