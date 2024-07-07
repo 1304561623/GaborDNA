@@ -30,6 +30,7 @@ parser.add_argument("--save_img", default=True, type=bool, help="save image of o
 parser.add_argument("--save_img_dir", type=str, default='./results/', help="path of saved image")
 parser.add_argument("--save_log", type=str, default='./log/', help="path of saved .pth")
 parser.add_argument("--threshold", type=float, default=0.5)
+parser.add_argument("--patchSize", type=int, default=2048, help="Training patch size, default: 512")
 
 global opt
 opt = parser.parse_args()
@@ -49,7 +50,7 @@ def test():
     
     eval_mIoU = mIoU() 
     eval_PD_FA = PD_FA()
-   with torch.no_grad():
+    with torch.no_grad():
         for idx_iter, (img, size, img_dir) in tqdm(enumerate(test_loader)):
             img = Variable(img).cuda()
             b, c, h, w = img.shape
